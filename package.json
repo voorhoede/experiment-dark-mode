@@ -1,0 +1,14 @@
+{
+  "name": "experiment-dark-mode",
+  "version": "1.0.0",
+  "description": "Collection of 'Dark Mode' experiments.",
+  "scripts": {
+    "start": "cd src && python -m SimpleHTTPServer 3001"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/voorhoede/experiment-dark-mode"
+  },
+  "author": "De Voorhoede",
+  "license": "MIT"
+}
