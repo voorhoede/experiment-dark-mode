@@ -1,9 +1,8 @@
 (function() {
   const clock = document.getElementById('clock');
 
-  function logData(currentTheme, currentTime, sunrise, sunset) {
+  function logData(currentTime, sunrise, sunset) {
     console.table({
-      currentTheme,
       currentTime: String(currentTime),
       sunrise: String(sunrise),
       sunset: String(sunset),
@@ -19,11 +18,10 @@
   }
 
   function updateCurrentTheme(currentTime, sunrise, sunset) {
-    const currentTheme =
-      currentTime > sunrise && currentTime < sunset
-        ? setLightTheme()
-        : setDarkTheme();
-    logData(currentTheme, currentTime, sunrise, sunset);
+    currentTime > sunrise && currentTime < sunset
+      ? setLightTheme()
+      : setDarkTheme();
+    logData(currentTime, sunrise, sunset);
   }
 
   if ('geolocation' in navigator) {
@@ -42,7 +40,7 @@
         );
 
         updateCurrentTheme(currentTime, sunrise, sunset);
-      }, 1000);
+      }, 500);
     });
   }
 })();
