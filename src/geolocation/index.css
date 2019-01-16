@@ -1,4 +1,31 @@
-html,
+*,
+*::before,
+*::after {
+  transition: all 0.25s ease-in-out;
+}
+
+body.dark-theme {
+  --background-color: #002b36;
+  --text-color: #fdf6e3;
+}
+
+body,
+body.light-theme {
+  --background-color: #fdf6e3;
+  --text-color: #002b36;
+}
+
 body {
-  margin: 0;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: sans-serif;
+}
+
+time {
+  border: 2px solid var(--text-color);
+  line-height: 2em;
+  padding: 0 2em;
+  position: absolute;
+  right: 1em;
+  top: 1em;
 }
