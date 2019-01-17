@@ -12,13 +12,13 @@
 /* https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #1e2b3a;
+    --background: #0d151f;
     --content: #e5e5e5;
     --content-alt-1: #c3c3c3;
     --content-alt-2: #969696;
 
     --magenta: #b60d5c;
-    --violet: #5b1b7c;
+    --violet: #27103d;
   }
 }
 
