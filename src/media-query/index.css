@@ -328,7 +328,7 @@ a,
   line-height: 1.6em;
 }
 
-#demo {
+.demo {
   align-items: center;
   background-color: #fffeca;
   border-bottom: 1px solid blue;
@@ -339,14 +339,14 @@ a,
   padding: 1.25em 5%;
 }
 
-#demo h4 {
+.demo h4 {
   font-weight: bold;
 }
 
-#demo a {
+.demo a {
   color: blue;
 }
 
-#demo a:hover {
+.demo a:hover {
   text-decoration: underline;
 }
