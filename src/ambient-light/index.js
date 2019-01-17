@@ -1,10 +1,14 @@
 (function() {
+  const illuminanceElement = document.getElementById('illuminance');
+
   if ('AmbientLightSensor' in window) {
     try {
       const sensor = new AmbientLightSensor();
 
       sensor.onreading = () => {
         const illuminance = sensor.illuminance;
+
+        illuminanceElement.innerHTML = `Illuminance: ${illuminance}`;
 
         if (illuminance < 20) {
           document.body.className = 'dark-theme';

@@ -325,15 +325,25 @@ a,
   line-height: 1.6em;
 }
 
-time {
-  border: 2px solid var(--content);
-  line-height: 2em;
-  padding: 0 2em;
-  position: absolute;
-  right: 50%;
-  text-align: center;
-  top: 0.85em;
-  transform: translateX(75px);
-  width: 150px;
-  z-index: 99;
+#demo {
+  align-items: center;
+  background-color: #fffeca;
+  border-bottom: 1px solid blue;
+  color: blue;
+  display: flex;
+  justify-content: space-between;
+  line-height: 0;
+  padding: 1.25em 5%;
+}
+
+#demo h4 {
+  font-weight: bold;
+}
+
+#demo a {
+  color: blue;
+}
+
+#demo a:hover {
+  text-decoration: underline;
 }

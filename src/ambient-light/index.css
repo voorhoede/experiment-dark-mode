@@ -324,3 +324,26 @@ a,
   color: #ebeef3;
   line-height: 1.6em;
 }
+
+#demo {
+  align-items: center;
+  background-color: #fffeca;
+  border-bottom: 1px solid blue;
+  color: blue;
+  display: flex;
+  justify-content: space-between;
+  line-height: 0;
+  padding: 1.25em 5%;
+}
+
+#demo h4 {
+  font-weight: bold;
+}
+
+#demo a {
+  color: blue;
+}
+
+#demo a:hover {
+  text-decoration: underline;
+}

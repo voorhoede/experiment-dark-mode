@@ -40,7 +40,7 @@
         );
 
         updateCurrentTheme(currentTime, sunrise, sunset);
-      }, 500);
+      }, 1000);
     });
   }
 })();
