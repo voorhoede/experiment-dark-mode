@@ -20,3 +20,33 @@
 .demo a:hover {
   text-decoration: underline;
 }
+
+.theme-menu {
+  position: absolute;
+  z-index: 1;
+  top: 100px;
+  right: 0;
+  width: 250px;
+  padding: 16px 16px 0;
+  background-color: #fff;
+  box-shadow: -3px 3px 5px -2px #383838;
+}
+
+.theme-options {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+[data-theme-settings="hidden"] + .theme-menu,
+[data-theme-auto-options="hide"] {
+  display: none;
+}
+
+[data-theme-settings="show"] + .theme-menu {
+  display: block;
+}
+
+[data-theme-auto-options="show"] {
+  display: flex;
+}

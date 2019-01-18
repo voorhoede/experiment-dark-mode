@@ -8,11 +8,11 @@
   <link rel="stylesheet" href="./index.css" />
   <link rel="stylesheet" href="../demo.css" />
 </head>
-<body class="layout--default" data-n-head="class">
-  <header class="demo">
+<body class="layout--default theme theme--light" data-n-head="class">
+  <div class="demo">
     <h4>Dark Mode Experiment - Putting it all together</h4>
     <a href="#">Blog Post 🔗</a>
-  </header>
+  </div>
   <header class="app-header app-header--open" id="menu">
     <a class="app-header__home" href="https://www.quantum-inspire.com/"><svg width="169" height="37" viewBox="0 0 169 37"
         version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve"
@@ -52,6 +52,38 @@
           <a class="app-header__user button button--primary" href="https://www.quantum-inspire.com/projects">
             My QI
           </a>
+        </li>
+        <li>
+          <a href="#" class="app-header__link" data-theme-settings="hidden">⚙️</a>
+          <form class="theme-menu" id="theme-settings">
+            Choose theme:
+            <fieldset id="theme-options" class="theme-options">
+              <label for="themeLight">
+                <input type="radio" value="light" name="theme-options" id="themeLight" checked>
+                <span>☀️ Light</span>
+              </label>
+              <label for="themeDark">
+                <input type="radio" value="dark" name="theme-options" id="themeDark">
+                <span>🌒 Dark</span>
+              </label>
+              <label for="themeAuto">
+                <input type="radio" value="auto" name="theme-options" id="themeAuto">
+                <span>🕐 Auto</span>
+              </label>
+            </fieldset>
+            <fieldset id="theme-auto-options" class="theme-options" data-theme-auto-options="hide">
+              Change theme using:
+              <label for="optionAmbient" hidden>
+                <input type="radio" value="ambient" name="theme-auto-options" id="optionAmbient">
+                <span>Ambient light</span>
+              </label>
+              <label for="optionLocation" hidden>
+                <input type="radio" value="location" name="theme-auto-options" id="optionLocation">
+                <span>Location</span>
+              </label>
+            </fieldset>
+            <time id="clock"></time>
+          </form>
         </li>
       </ul>
     </nav>
@@ -802,6 +834,7 @@
       </div>
     </section>
   </footer>
+  <script src="./suncalc.js"></script>
   <script src="./index.js"></script>
 </body>
 </html>

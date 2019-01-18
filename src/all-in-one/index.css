@@ -13,8 +13,12 @@ html {
   box-sizing: border-box;
   overflow-y: scroll;
 }
-body,
-body.light-theme {
+.theme > * {
+  transition: background-color 0.35s ease-in-out, color 0.35s ease-in-out;
+  background-color: var(--base3);
+  color: var(--base03);
+}
+.theme--light {
   --base03: #283444;
   --base02: #3c4857;
   --base01: #515c6a;
@@ -23,12 +27,8 @@ body.light-theme {
   --base1: #acb8c8;
   --base2: #ebeef3;
   --base3: #ffffff;
-
-  transition: all 0.35s ease-in-out;
-  background-color: var(--base3);
-  color: var(--base03);
 }
-body.dark-theme {
+.theme--dark {
   --base3: #283444;
   --base2: #3c4857;
   --base1: #515c6a;
