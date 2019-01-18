@@ -1,0 +1,22 @@
+.demo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25em 5%;
+  border-bottom: 1px solid blue;
+  background-color: #ffe400;
+  color: blue;
+  line-height: 0;
+}
+
+.demo h4 {
+  font-weight: bold;
+}
+
+.demo a {
+  color: blue;
+}
+
+.demo a:hover {
+  text-decoration: underline;
+}
