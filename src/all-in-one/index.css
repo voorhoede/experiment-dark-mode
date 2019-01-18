@@ -375,6 +375,10 @@ pre {
   color: var(--base00);
   font-weight: 700;
 }
+.app-header .theme-menu {
+  background-color: var(--base3);
+  box-shadow: -3px 3px 5px -2px #383838;
+}
 .app-header__home {
   height: 37px;
 }

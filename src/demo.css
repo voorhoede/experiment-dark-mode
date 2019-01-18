@@ -28,8 +28,7 @@
   right: 0;
   width: 250px;
   padding: 16px 16px 0;
-  background-color: #fff;
-  box-shadow: -3px 3px 5px -2px #383838;
+  transition: background-color 0.35s ease-in-out, color 0.35s ease-in-out;
 }
 
 .theme-options {
