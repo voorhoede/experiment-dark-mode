@@ -1,16 +1,18 @@
-(function() {
+(() => {
   const clock = document.getElementById('clock');
 
   function setLightTheme() {
-    document.body.className = 'light-theme';
+    document.body.classList.add('theme--light');
+    document.body.classList.remove('theme--dark');
   }
 
   function setDarkTheme() {
-    document.body.className = 'dark-theme';
+    document.body.classList.add('theme--dark');
+    document.body.classList.remove('theme--light');
   }
 
   function updateCurrentTheme(currentTime, sunrise, sunset) {
-    currentTime > sunrise && currentTime < sunset
+    (currentTime > sunrise && currentTime < sunset)
       ? setLightTheme()
       : setDarkTheme();
   }
@@ -21,7 +23,6 @@
       const { latitude, longitude } = position.coords;
 
       setInterval(() => {
-        // const currentTime = new Date();
         currentTime.setHours(currentTime.getHours() + 1);
         clock.innerHTML = `${currentTime.getHours()}:59`;
         const { sunrise, sunset } = SunCalc.getTimes(

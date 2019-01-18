@@ -1,5 +1,15 @@
-(function() {
+(() =>{
   const illuminanceElement = document.getElementById('illuminance');
+
+  function setLightTheme() {
+    document.body.classList.add('theme--light');
+    document.body.classList.remove('theme--dark');
+  }
+
+  function setDarkTheme() {
+    document.body.classList.add('theme--dark');
+    document.body.classList.remove('theme--light');
+  }
 
   if ('AmbientLightSensor' in window) {
     try {
@@ -11,14 +21,14 @@
         illuminanceElement.innerHTML = `Illuminance: ${illuminance}`;
 
         if (illuminance < 20) {
-          document.body.className = 'dark-theme';
+          setDarkTheme();
         } else if (illluminance > 30) {
-          document.body.className = 'light-theme';
+          setLightTheme();
         }
       };
 
-      sensor.onerror = e => {
-        console.log(e.error.name, e.error.message);
+      sensor.onerror = ({ error }) => {
+        console.log(error.name, error.message);
       };
 
       sensor.start();
