@@ -7,47 +7,69 @@
 
   const themeSettings = document.querySelector('[data-theme-settings]');
   const themeAutoOptions = document.querySelector('[data-theme-auto-options]');
+  const speedUpButton = document.querySelector('[data-speed-up-timer]');
   const clock = document.getElementById('clock');
+  let timer = null;
+  let currentTime = new Date();
 
+  speedUpButton.addEventListener('click', adjustTimer, false);
   themeSettings.addEventListener('click', showSettings, false);
-  buttonThemeLight.addEventListener('click', setLightTheme, false);
-  buttonThemeDark.addEventListener('click', setDarkTheme, false);
+  buttonThemeLight.addEventListener('click', useLightTheme, false);
+  buttonThemeDark.addEventListener('click', useDarkTheme, false);
   buttonThemeAuto.addEventListener('click', showAutoOptions, false);
   buttonThemeAmbient.addEventListener('click', useAmbientLight, false);
   buttonThemeLocation.addEventListener('click', useLocation, false);
 
+  // Set light theme
+  function setLightTheme() {
+    document.body.classList.add('theme--light');
+    document.body.classList.remove('theme--dark');
+  }
+
+  // Set dark theme
+  function setDarkTheme() {
+    document.body.classList.add('theme--dark');
+    document.body.classList.remove('theme--light');
+  }
+
+  // Toggle the theme menu
   function showSettings() {
     themeSettings.getAttribute('data-theme-settings') === 'hidden'
       ? themeSettings.setAttribute('data-theme-settings', 'show')
       : themeSettings.setAttribute('data-theme-settings', 'hidden');
   }
 
-  function setLightTheme() {
-    document.body.classList.add('theme--light');
-    document.body.classList.remove('theme--dark');
-  }
-
-  function setDarkTheme() {
-    document.body.classList.add('theme--dark');
-    document.body.classList.remove('theme--light');
-  }
-
+  // Show extra options when 'Auto' is selected.
   function showAutoOptions() {
     themeAutoOptions.setAttribute('data-theme-auto-options', 'show');
   }
 
+   // User selected light theme.
+  function useLightTheme() {
+    themeAutoOptions.setAttribute('data-theme-auto-options', 'hide');
+    clearInterval(timer);
+    clock.innerHTML = '';
+    setLightTheme();
+  }
+
+  // User selected dark theme.
+  function useDarkTheme() {
+    themeAutoOptions.setAttribute('data-theme-auto-options', 'hide');
+    clearInterval(timer);
+    clock.innerHTML = '';
+    setDarkTheme();
+  }
+
+  // Use ambient light sensor for theme.
   function useAmbientLight() {
     const sensor = new AmbientLightSensor();
+    const illuminance = sensor.illuminance;
 
     sensor.onreading = () => {
-      const illuminance = sensor.illuminance;
-
-      illuminanceElement.innerHTML = `Illuminance: ${illuminance}`;
-
       if (illuminance < 20) {
-        document.body.className = 'theme--dark';
+        setDarkTheme();
       } else if (illluminance > 30) {
-        document.body.className = 'theme--light';
+        setLightTheme();
       }
     };
 
@@ -59,33 +81,48 @@
     sensor.start();
   }
 
+  // Use location for theme.
   function useLocation() {
-    navigator.geolocation.getCurrentPosition(position => {
-      let currentTime = new Date();
-      const { latitude, longitude } = position.coords;
+    const options = {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0
+    };
 
-      setInterval(() => {
-        currentTime.setHours(currentTime.getHours() + 1);
-        clock.innerHTML = `${currentTime.getHours()}:59`;
-        let { sunrise, sunset } = SunCalc.getTimes(currentTime, latitude, longitude);
-        updateCurrentTheme(currentTime, sunrise, sunset);
-      }, 1000);
-    });
+    navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
+
+    function onSuccess ({ coords }) {
+      const { latitude, longitude } = coords;
+      let { sunrise, sunset } = SunCalc.getTimes(currentTime, latitude, longitude);
+
+      (currentTime > sunrise && currentTime < sunset)
+        ? setLightTheme()
+        : setDarkTheme();
+    }
+
+    function onError(error) {
+      console.warn(`ERROR(${error.code}): ${error.message}`);
+    }
   }
 
-  function updateCurrentTheme(currentTime, sunrise, sunset) {
-    (currentTime > sunrise && currentTime < sunset)
-      ? setLightTheme()
-      : setDarkTheme();
+  // Speed up time for demo purposes
+  function adjustTimer() {
+    timer = setInterval(() => {
+      currentTime.setHours(currentTime.getHours() + 1);
+      clock.innerHTML = `${currentTime.getHours()}:59`;
+      useLocation();
+    }, 1000);
   }
 
-  // Ambient light sensor
+  // Feature detections for Ambient Light Sensor
   if ('AmbientLightSensor' in window) {
+    // show the button
     buttonThemeAmbient.parentElement.removeAttribute('hidden');
   }
 
-  // Use current time
+  // Feature detections for geolocation
   if ('geolocation' in navigator) {
+    // show the button
     buttonThemeLocation.parentElement.removeAttribute('hidden');
   }
 })();
