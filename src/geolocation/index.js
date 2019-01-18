@@ -1,14 +1,6 @@
 (function() {
   const clock = document.getElementById('clock');
 
-  function logData(currentTime, sunrise, sunset) {
-    console.table({
-      currentTime: String(currentTime),
-      sunrise: String(sunrise),
-      sunset: String(sunset),
-    });
-  }
-
   function setLightTheme() {
     document.body.className = 'light-theme';
   }
@@ -21,7 +13,6 @@
     currentTime > sunrise && currentTime < sunset
       ? setLightTheme()
       : setDarkTheme();
-    logData(currentTime, sunrise, sunset);
   }
 
   if ('geolocation' in navigator) {
