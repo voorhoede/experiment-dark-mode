@@ -1,24 +1,106 @@
 .demo {
   display: flex;
+  position: fixed;
+  z-index: 9999; /* .app-header__nav has 999 */
+  top: 0;
   align-items: center;
   justify-content: space-between;
-  padding: 1.25em 5%;
+  width: 100%;
+  padding: 4px 8px;
   border-bottom: 1px solid blue;
   background-color: #ffe400;
   color: blue;
-  line-height: 0;
 }
 
-.demo h4 {
-  font-weight: bold;
+.demo + .app-header {
+  margin-top: 51px;
 }
 
 .demo a {
+  border-bottom: 1px solid transparent;
   color: blue;
 }
 
-.demo a:hover {
-  text-decoration: underline;
+.demo a::after {
+  display: none;
+}
+
+.demo__title h4 {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.demo__title p {
+  font-size: 13px;
+}
+
+.demo__output {
+  font-size: 14px;
+}
+
+@media (min-width: 640px) {
+  .demo {
+    padding: 12px 16px;
+  }
+  .demo__title {
+    display: flex;
+    align-items: center;
+  }
+
+  .demo__title h4,
+  .demo__title p {
+    font-size: 16px;
+  }
+
+  .demo__title h4 {
+    margin-right: 4px;
+  }
+
+  .demo__output {
+    font-size: 16px;
+  }
+}
+
+.demo-toggle__button {
+  display: inline-block;
+  float: left;
+}
+
+.demo-toggle__button > input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
+
+.demo-toggle__button:first-child .demo-toggle__label {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.demo-toggle__button:last-child .demo-toggle__label {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.demo-toggle__button input + .demo-toggle__label {
+  display: inline-block;
+  padding: 1px 12px;
+  transition: background-color 0.35s ease-in-out, color 0.35s ease-in-out;
+  border: 1px solid blue;
+  background-color: #ffe400;
+  color: blue;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.demo-toggle__button input:checked + .demo-toggle__label {
+  background-color: blue;
+  color: #ffffff;
 }
 
 .theme-menu {
