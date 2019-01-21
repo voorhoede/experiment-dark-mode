@@ -1693,10 +1693,6 @@ input:invalid:not(:placeholder-shown)
     padding-left: 2rem;
   }
 }
-.page-menu {
-  border: 2px solid var(--base2);
-  border-radius: 4px;
-}
 .page-menu__content {
   display: none;
 }
