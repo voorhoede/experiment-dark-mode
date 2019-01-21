@@ -1,9 +1,9 @@
 (() => {
-  const lightBtn = document.getElementById('themeLight');
-  const darkBtn = document.getElementById('themeDark');
+  const lightButton = document.getElementById('light-theme');
+  const darkButton = document.getElementById('dark-theme');
 
-  lightBtn.addEventListener('click', setLightTheme);
-  darkBtn.addEventListener('click', setDarkTheme);
+  lightButton.addEventListener('click', setLightTheme);
+  darkButton.addEventListener('click', setDarkTheme);
 
   function setLightTheme() {
     document.body.classList.add('theme--light');
