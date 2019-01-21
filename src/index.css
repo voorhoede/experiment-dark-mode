@@ -38,7 +38,7 @@ header li {
 
 header a {
   text-decoration: none;
-  color: #0000ff;
+  color: blue;
 }
 
 header a:hover {
