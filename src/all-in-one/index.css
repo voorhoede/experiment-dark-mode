@@ -18,6 +18,39 @@ html {
   background-color: var(--base3);
   color: var(--base03);
 }
+.theme-options label[for="optionSystem"] {
+  display: none;
+}
+@media (prefers-color-scheme: light) {
+  .theme-options label[for="optionSystem"] {
+    display: block;
+  }
+  .theme {
+    --base03: #283444;
+    --base02: #3c4857;
+    --base01: #515c6a;
+    --base00: #677485;
+    --base0: #9eabbd;
+    --base1: #acb8c8;
+    --base2: #ebeef3;
+    --base3: #ffffff;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .theme-options label[for="optionSystem"] {
+    display: block;
+  }
+  .theme {
+    --base3: #283444;
+    --base2: #3c4857;
+    --base1: #515c6a;
+    --base0: #677485;
+    --base00: #9eabbd;
+    --base01: #acb8c8;
+    --base02: #ebeef3;
+    --base03: #ffffff;
+  }
+}
 .theme--light {
   --base03: #283444;
   --base02: #3c4857;

@@ -4,6 +4,7 @@
   const buttonThemeAuto = document.getElementById('themeAuto');
   const buttonThemeAmbient = document.getElementById('optionAmbient');
   const buttonThemeLocation = document.getElementById('optionLocation');
+  const buttonThemeSystem = document.getElementById('optionSystem');
 
   const themeSettings = document.querySelector('[data-theme-settings]');
   const themeAutoOptions = document.querySelector('[data-theme-auto-options]');
@@ -19,6 +20,7 @@
   buttonThemeAuto.addEventListener('click', showAutoOptions, false);
   buttonThemeAmbient.addEventListener('click', useAmbientLight, false);
   buttonThemeLocation.addEventListener('click', useLocation, false);
+  buttonThemeSystem.addEventListener('click', useSystem, false);
 
   // Set light theme
   function setLightTheme() {
@@ -103,6 +105,12 @@
     function onError(error) {
       console.warn(`ERROR(${error.code}): ${error.message}`);
     }
+  }
+
+  // Use system setting for theme.
+  function useSystem() {
+    document.body.classList.remove('theme--dark');
+    document.body.classList.remove('theme--light');
   }
 
   // Speed up time for demo purposes
