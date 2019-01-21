@@ -397,7 +397,7 @@ pre {
 .app-header__nav {
   position: absolute;
   z-index: 999;
-  top: 3.75rem;
+  top: 6.25rem;
   left: 0;
   width: 100%;
   margin: 0;
