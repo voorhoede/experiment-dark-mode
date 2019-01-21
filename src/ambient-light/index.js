@@ -1,4 +1,4 @@
-(() =>{
+(() => {
   const illuminanceElement = document.getElementById('illuminance');
 
   function setLightTheme() {
