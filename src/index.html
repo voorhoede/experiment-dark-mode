@@ -8,52 +8,57 @@
     <link rel="stylesheet" href="./index.css" />
   </head>
   <body>
-    <header>
+    <header class="main-header">
       <img
+        class="main-header__logo"
         src="https://www.voorhoede.nl/images/logo-with-text.svg"
         alt="De Voorhoede - Logo"
       />
-      <h1>🔬 Dark Mode Experiment</h1>
+      <h1 class="main-header__h1">🔬 Dark Mode Experiment</h1>
       <nav>
-        <ul>
-          <li>
-            <a href="https://github.com/voorhoede/experiment-dark-mode"
+        <ul class="main-header__list">
+          <li class="main-header__list-item">
+            <a
+              class="main-header__link"
+              href="https://github.com/voorhoede/experiment-dark-mode"
               >GitHub Repo</a
             >
           </li>
-          <li><a href="">Blog Post</a></li>
+          <li class="main-header__list-item">
+            <a class="main-header__link" href="">Blog Post</a>
+          </li>
         </ul>
       </nav>
     </header>
-    <main>
-      <article>
-        <a href="/src/ambient-light/">
-          <p>☀️</p>
-          <h2>Ambient Light</h2>
+    <main class="wrapper">
+      <article class="demo">
+        <a class="demo__link" href="/src/ambient-light/">
+          <p class="demo__icon">☀️</p>
+          <h2 class="demo__title">Ambient Light</h2>
         </a>
       </article>
-      <article>
-        <a href="/src/geolocation/">
-          <p>🌍</p>
-          <h2>Geolocation API</h2>
+      <article class="demo">
+        <a class="demo__link" href="/src/geolocation/">
+          <p class="demo__icon">🌍</p>
+          <h2 class="demo__title">Geolocation API</h2>
         </a>
       </article>
-      <article>
-        <a href="/src/manual-control/">
-          <p>🕹</p>
-          <h2>Manual Controls</h2>
+      <article class="demo">
+        <a class="demo__link" href="/src/manual-control/">
+          <p class="demo__icon">🕹</p>
+          <h2 class="demo__title">Manual Controls</h2>
         </a>
       </article>
-      <article>
-        <a href="/src/ambient-light/">
-          <p>💻</p>
-          <h2>CSS Media Query</h2>
+      <article class="demo">
+        <a class="demo__link" href="/src/ambient-light/">
+          <p class="demo__icon">💻</p>
+          <h2 class="demo__title">CSS Media Query</h2>
         </a>
       </article>
-      <article>
-        <a href="/src/all-in-one/">
-          <p>🏁</p>
-          <h2>All-in-One Demo</h2>
+      <article class="demo demo--final">
+        <a class="demo__link" href="/src/all-in-one/">
+          <p class="demo__icon">🏁</p>
+          <h2 class="demo__title">All-in-One Demo</h2>
         </a>
       </article>
     </main>
