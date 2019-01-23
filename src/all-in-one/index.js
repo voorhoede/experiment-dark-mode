@@ -1,28 +1,18 @@
 (function() {
   // Element variables
-  const buttonThemeLight = document.getElementById('themeLight');
-  const buttonThemeDark = document.getElementById('themeDark');
   const buttonThemeAuto = document.getElementById('themeAuto');
-  const buttonThemeAmbient = document.getElementById('optionAmbient');
-  const buttonThemeLocation = document.getElementById('optionLocation');
-  const buttonThemeSystem = document.getElementById('optionSystem');
+  const buttonThemeDark = document.getElementById('themeDark');
+  const buttonThemeLight = document.getElementById('themeLight');
+  const feedbackMessage = document.getElementById('feedbackMessage');
   const themeSettings = document.querySelector('[data-theme-settings]');
-  const themeAutoOptions = document.querySelector('[data-theme-auto-options]');
-  const speedUpButton = document.querySelector('[data-speed-up-timer]');
-  const clock = document.getElementById('clock');
 
   // Events
-  buttonThemeLight.addEventListener('click', useLightTheme, false);
+  buttonThemeAuto.addEventListener('click', useAutoMode, false);
   buttonThemeDark.addEventListener('click', useDarkTheme, false);
-  buttonThemeAuto.addEventListener('click', showAutoOptions, false);
-  buttonThemeAmbient.addEventListener('click', useAmbientLight, false);
-  buttonThemeLocation.addEventListener('click', useLocation, false);
-  buttonThemeSystem.addEventListener('click', useSystem, false);
-  speedUpButton.addEventListener('click', adjustTimer, false);
+  buttonThemeLight.addEventListener('click', useLightTheme, false);
   themeSettings.addEventListener('click', showSettings, false);
 
   let timer = null;
-  let currentTime = new Date();
 
   /**
    * setLightTheme
@@ -56,42 +46,39 @@
   }
 
   /**
-   * showAutoOptions
-   *
-   * Show extra options when 'Auto' is selected.
-   */
-  function showAutoOptions() {
-    themeAutoOptions.setAttribute('data-theme-auto-options', 'show');
-  }
-
-  /**
    * useLightTheme
    *
    * User selected light theme manually.
-   * - 'Auto' options are hidden
-   * - Timer and clock are reset
    * - Run setLightTheme()
    */
   function useLightTheme() {
-    themeAutoOptions.setAttribute('data-theme-auto-options', 'hide');
-    clearInterval(timer);
-    clock.innerHTML = '';
     setLightTheme();
+    feedbackMessage.innerHTML = 'Manual Controls';
   }
 
   /**
    * useDarkTheme
    *
    * User selected dark theme manually.
-   * - 'Auto' options are hidden
-   * - Timer and clock are reset
    * - Run setDarkTheme()
    */
   function useDarkTheme() {
-    themeAutoOptions.setAttribute('data-theme-auto-options', 'hide');
-    clearInterval(timer);
-    clock.innerHTML = '';
     setDarkTheme();
+    feedbackMessage.innerHTML = 'Manual Controls';
+  }
+
+  /**
+   * useSystem
+   *
+   * When available, use system setting for theme.
+   * Removes any previously set theme classes.
+   *
+   * Ref: https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme
+   */
+  function useSystem() {
+    document.body.classList.remove('theme--dark');
+    document.body.classList.remove('theme--light');
+    feedbackMessage.innerHTML = 'CSS Feature Toggle';
   }
 
   /**
@@ -111,11 +98,12 @@
       } else if (illluminance > 30) {
         setLightTheme();
       }
+      feedbackMessage.innerHTML = 'Ambient Light Sensor';
     };
 
     sensor.onerror = ({ error }) => {
-      console.log(error.name, error.message);
-      alert(`${error.message}. Please use your location.`);
+      console.warn(`ERROR(${error.name}): ${error.message}`);
+      useLocation(); // If the Ambient Light Sensor is not working, fallback to Geolocation.
     };
 
     sensor.start();
@@ -131,23 +119,36 @@
   function useLocation() {
     const options = {
       enableHighAccuracy: true,
-      timeout: 5000,
       maximumAge: 0,
+      timeout: 5000,
     };
 
+    clearInterval(timer);
     navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
 
     function onSuccess({ coords }) {
+      let currentTime = new Date();
       const { latitude, longitude } = coords;
-      let { sunrise, sunset } = SunCalc.getTimes(
-        currentTime,
-        latitude,
-        longitude,
-      );
 
-      currentTime > sunrise && currentTime < sunset
-        ? setLightTheme()
-        : setDarkTheme();
+      timer = setInterval(() => {
+        if (buttonThemeAuto.checked) {
+          currentTime.setHours(currentTime.getHours() + 1);
+
+          const { sunrise, sunset } = SunCalc.getTimes(
+            currentTime,
+            latitude,
+            longitude,
+          );
+
+          currentTime > sunrise && currentTime < sunset
+            ? setLightTheme()
+            : setDarkTheme();
+
+          feedbackMessage.innerHTML = `
+          Geolocation (Current Simutated Time: ${currentTime.getHours()}:${currentTime.getMinutes()}
+        `;
+        }
+      }, 1000);
     }
 
     function onError(error) {
@@ -156,45 +157,17 @@
   }
 
   /**
-   * useSystem
+   * useAutoMode
    *
-   * When available, use system setting for theme.
-   * Removes any previously set theme classes.
-   *
-   * Ref: https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme
+   * Automatically selects the best option based on feature detection.
    */
-  function useSystem() {
-    document.body.classList.remove('theme--dark');
-    document.body.classList.remove('theme--light');
-  }
-
-  /**
-   * adjustTimer
-   *
-   * When 'location' is use for theme switching we can speed up time for demo purposes.
-   */
-  function adjustTimer() {
-    timer = setInterval(() => {
-      currentTime.setHours(currentTime.getHours() + 1);
-      clock.innerHTML = `${currentTime.getHours()}:59`;
+  function useAutoMode() {
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      useSystem();
+    } else if ('AmbientLightSensor' in window) {
+      useAmbientLight();
+    } else if ('geolocation' in navigator) {
       useLocation();
-    }, 1000);
-  }
-
-  // Feature detections for Ambient Light Sensor
-  if ('AmbientLightSensor' in window) {
-    // show the button
-    optionAmbient.disabled = false;
-  }
-
-  // Feature detections for geolocation
-  if ('geolocation' in navigator) {
-    // show the button
-    optionLocation.disabled = false;
-    speedUpButton.hidden = false;
-  }
-
-  if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    optionSystem.disabled = false;
+    }
   }
 })();
