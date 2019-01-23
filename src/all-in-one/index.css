@@ -18,13 +18,12 @@ html {
   background-color: var(--base3);
   color: var(--base03);
 }
-.theme-options label[for="optionSystem"] {
-  display: none;
+.theme-options input:disabled,
+.theme-options input:disabled ~ span {
+  opacity: 0.5;
 }
+
 @media (prefers-color-scheme: light) {
-  .theme-options label[for="optionSystem"] {
-    display: block;
-  }
   .theme {
     --base03: #283444;
     --base02: #3c4857;
@@ -37,7 +36,7 @@ html {
   }
 }
 @media (prefers-color-scheme: dark) {
-  .theme-options label[for="optionSystem"] {
+  .theme-options label[for='optionSystem'] {
     display: block;
   }
   .theme {

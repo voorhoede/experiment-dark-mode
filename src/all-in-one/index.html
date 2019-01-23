@@ -10,8 +10,10 @@
 </head>
 <body class="layout--default theme theme--light" data-n-head="class">
   <div class="demo">
-    <h4>🔬 Dark Mode</h4>
-    <p>All-in-one</p>
+    <a href="/" class="demo__title" rel="noopener noreferrer">
+      <h4>🔬 Dark Mode</h4>
+      <p>All-in-one</p>
+    </a>
   </div>
   <header class="app-header app-header--open" id="menu">
     <a class="app-header__home" href="https://www.quantum-inspire.com/">
@@ -79,15 +81,15 @@
             <fieldset id="theme-auto-options" class="theme-options" data-theme-auto-options="hide">
               Change theme using:
               <label for="optionSystem">
-                <input type="radio" value="system" name="theme-auto-options" id="optionSystem">
+                <input disabled type="radio" value="system" name="theme-auto-options" id="optionSystem">
                 <span>System setting</span>
               </label>
-              <label for="optionAmbient" hidden>
-                <input type="radio" value="ambient" name="theme-auto-options" id="optionAmbient">
+              <label for="optionAmbient">
+                <input disabled type="radio" value="ambient" name="theme-auto-options" id="optionAmbient">
                 <span>Ambient light</span>
               </label>
-              <label for="optionLocation" hidden>
-                <input type="radio" value="location" name="theme-auto-options" id="optionLocation">
+              <label for="optionLocation">
+                <input disabled type="radio" value="location" name="theme-auto-options" id="optionLocation">
                 <span>Location</span>
                 <time id="clock"></time>
                 <a href="#" data-speed-up-timer> ⏩ </a>

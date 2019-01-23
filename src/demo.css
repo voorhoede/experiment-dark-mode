@@ -12,8 +12,16 @@
   color: blue;
 }
 
+.demo strong {
+  margin-left: 0.5rem;
+}
+
+.demo strong:first-of-type {
+  margin-left: 0;
+}
+
 .demo + .app-header {
-  margin-top: 51px;
+  margin-top: 50px;
 }
 
 .demo a {
@@ -73,7 +81,7 @@
   margin: -1px;
   padding: 0;
   overflow: hidden;
-  clip: rect(0,0,0,0);
+  clip: rect(0, 0, 0, 0);
   border: 0;
 }
 
@@ -106,7 +114,7 @@
 .theme-menu {
   position: absolute;
   z-index: 1;
-  top: 100px;
+  top: 110px;
   right: 0;
   width: 250px;
   padding: 16px 16px 0;
@@ -119,15 +127,15 @@
   margin-bottom: 16px;
 }
 
-[data-theme-settings="hidden"] + .theme-menu,
-[data-theme-auto-options="hide"] {
+[data-theme-settings='hidden'] + .theme-menu,
+[data-theme-auto-options='hide'] {
   display: none;
 }
 
-[data-theme-settings="show"] + .theme-menu {
+[data-theme-settings='show'] + .theme-menu {
   display: block;
 }
 
-[data-theme-auto-options="show"] {
+[data-theme-auto-options='show'] {
   display: flex;
 }

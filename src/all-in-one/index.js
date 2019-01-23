@@ -132,16 +132,20 @@
     const options = {
       enableHighAccuracy: true,
       timeout: 5000,
-      maximumAge: 0
+      maximumAge: 0,
     };
 
     navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
 
-    function onSuccess ({ coords }) {
+    function onSuccess({ coords }) {
       const { latitude, longitude } = coords;
-      let { sunrise, sunset } = SunCalc.getTimes(currentTime, latitude, longitude);
+      let { sunrise, sunset } = SunCalc.getTimes(
+        currentTime,
+        latitude,
+        longitude,
+      );
 
-      (currentTime > sunrise && currentTime < sunset)
+      currentTime > sunrise && currentTime < sunset
         ? setLightTheme()
         : setDarkTheme();
     }
@@ -180,12 +184,16 @@
   // Feature detections for Ambient Light Sensor
   if ('AmbientLightSensor' in window) {
     // show the button
-    buttonThemeAmbient.parentElement.removeAttribute('hidden');
+    optionAmbient.disabled = false;
   }
 
   // Feature detections for geolocation
   if ('geolocation' in navigator) {
     // show the button
-    buttonThemeLocation.parentElement.removeAttribute('hidden');
+    optionLocation.disabled = false;
+  }
+
+  if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    optionSystem.disabled = false;
   }
 })();

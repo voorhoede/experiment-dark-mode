@@ -5,5 +5,4 @@
   supportsMediaQuery
     ? output.innerHTML = 'Supported'
     : output.innerHTML = 'Not supported';
-
 })();

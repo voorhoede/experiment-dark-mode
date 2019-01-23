@@ -1,5 +1,6 @@
 (() => {
   const illuminanceElement = document.getElementById('illuminance');
+  const output = document.querySelector('[data-demo-output]');
 
   function setLightTheme() {
     document.body.classList.add('theme--light');
@@ -12,6 +13,7 @@
   }
 
   if ('AmbientLightSensor' in window) {
+    output.innerHTML = 'Supported';
     try {
       const sensor = new AmbientLightSensor();
 
@@ -28,12 +30,14 @@
       };
 
       sensor.onerror = ({ error }) => {
-        console.log(error.name, error.message);
+        output.innerHTML = 'Not supported';
       };
 
       sensor.start();
     } catch (e) {
       console.error(e);
     }
+  } else {
+    output.innerHTML = 'Not supported';
   }
 })();
