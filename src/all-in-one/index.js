@@ -191,6 +191,7 @@
   if ('geolocation' in navigator) {
     // show the button
     optionLocation.disabled = false;
+    speedUpButton.hidden = false;
   }
 
   if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
