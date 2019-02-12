@@ -145,7 +145,7 @@
             : setDarkTheme();
 
           feedbackMessage.innerHTML = `
-          Geolocation (Current Simutated Time: ${currentTime.getHours()}:59
+          Geolocation (Current Simutated Time: ${currentTime.getHours()}:59)
         `;
         }
       }, 1000);
