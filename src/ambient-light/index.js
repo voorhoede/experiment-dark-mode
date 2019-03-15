@@ -22,9 +22,9 @@
 
         illuminanceElement.innerHTML = illuminance;
 
-        if (illuminance < 20) {
+        if (illuminance < 50) {
           setDarkTheme();
-        } else if (illluminance > 30) {
+        } else if (illuminance > 60) {
           setLightTheme();
         }
       };
