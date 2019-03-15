@@ -20,7 +20,7 @@
       sensor.onreading = () => {
         const illuminance = sensor.illuminance;
 
-        illuminanceElement.innerHTML = `Illuminance: ${illuminance}`;
+        illuminanceElement.innerHTML = illuminance;
 
         if (illuminance < 20) {
           setDarkTheme();
